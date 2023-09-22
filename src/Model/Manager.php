@@ -11,7 +11,7 @@ class Manager{
 
     private $bdd;
 
-    private function dbConnect()
+    protected function dbConnect()
     {
         if($this->bdd === NULL)
         {
