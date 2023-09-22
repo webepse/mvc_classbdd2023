@@ -5,7 +5,7 @@ use App\Model\PostManager;
 
 class HomeController{
 
-    public static function listPost()
+    public static function listPost(): void
     {
 
         $postManager = new PostManager();
@@ -15,6 +15,13 @@ class HomeController{
         require("view/frontend/listPostView.php");
     }
 
+    public static function post(int $id): void
+    {
+        $postManager = new PostManager();
+        $post = $postManager->getPost($id);
+
+        require("view/frontend/postView.php");
+    }
 
 }
 
