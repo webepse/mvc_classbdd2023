@@ -19,6 +19,12 @@
     </div>
 <?php endforeach; ?>
 <h5>Ajouter un commentaire</h5>
+
+<?php if(isset($_GET['error'])): ?>
+
+    <div class="error">Une erreur est survenue (code erreur: <?= $_GET['error'] ?>)</div>
+
+<?php endif; ?>
 <form action="index.php?action=addcomment&id=<?= $post->id ?>" method="POST">
     <div>
         <label for="author">Auteur: </label>

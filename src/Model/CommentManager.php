@@ -10,8 +10,28 @@
             $comments = $this->dbConnect()->prepare("SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%i') as mydate FROM comments WHERE post_id=? ORDER BY comment_date DESC");
             $comments->execute([$postId]);
             $datas = $comments->fetchAll(\PDO::FETCH_OBJ);
+            $comments->closeCursor();
 
             return $datas;
+        }
+
+        public function addComment(int $postId, string $author, string $comment): bool
+        {
+            $insert = $this->dbConnect()->prepare("INSERT INTO comments(author,comment,comment_date, post_id) VALUES(:author,:comment,NOW(),:myid)");
+            $affectline = $insert->execute([
+                ":author" => $author,
+                ":comment" => $comment,
+                ":myid" => $postId
+            ]);
+            $insert->closeCursor();
+
+            if($affectline)
+            {
+                return true;
+            }else{
+                return false;
+            }
+            
         }
     }
 

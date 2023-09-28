@@ -29,7 +29,7 @@ class HomeController{
     public static function addComment(int $id): void
     {
         // test du $_POST
-        if(empty($_POST['auhtor']))
+        if(empty($_POST['author']))
         {
             $err=1;
         }else{
@@ -41,6 +41,23 @@ class HomeController{
             $err=2;
         }else{
             $comment = htmlspecialchars($_POST['comment']);
+        }
+
+        if(isset($err))
+        {
+            // gestion de l'erreur
+            // redirection 
+            header("LOCATION:index.php?action=post&id=".$id."&error=".$err);
+        }else{
+            // appel au model
+            $commentManager = new CommentManager();
+            $addComment = $commentManager->addComment($id, $author, $comment);
+            if($addComment)
+            {
+                header("LOCATION:index.php?action=post&id=".$id);
+            }else{
+                header("LOCATION:index.php?action=post&id=".$id."&error=3");
+            }
         }
 
     }
