@@ -17,10 +17,21 @@
             <?= nl2br($comment->comment) ?>
         </div>
     </div>
-
-
-
-<?php endforeach; ?>    
+<?php endforeach; ?>
+<h5>Ajouter un commentaire</h5>
+<form action="index.php?action=addcomment&id=<?= $post->id ?>" method="POST">
+    <div>
+        <label for="author">Auteur: </label>
+        <input type="text" name="author" id="author">
+    </div>
+    <div>
+        <label for="comment">Commentaire: </label><br>
+        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Envoyer">
+    </div>
+</form>
 
 
 <?php $content = ob_get_clean() ?>

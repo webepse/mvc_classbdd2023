@@ -21,6 +21,15 @@ try{
             }else{
                 throw new Exception("Il manque l'identifiant du post pour continuer");
             }
+        }elseif($_GET['action']=="addcomment" && isset($_POST['author']))
+        {
+            if(isset($_GET['id']))
+            {
+                $id = htmlspecialchars($_GET['id']);
+                HomeController::addComment($id);
+            }else{
+                throw new Exception("Il manque l'identifiant du post pour continuer");
+            }
         }
         else{
             throw new Exception("La page que vous cherchez n'existe pas");

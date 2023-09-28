@@ -26,6 +26,25 @@ class HomeController{
         require("view/frontend/postView.php");
     }
 
+    public static function addComment(int $id): void
+    {
+        // test du $_POST
+        if(empty($_POST['auhtor']))
+        {
+            $err=1;
+        }else{
+            $author = htmlspecialchars($_POST['author']);
+        }
+
+        if(empty($_POST['comment']))
+        {
+            $err=2;
+        }else{
+            $comment = htmlspecialchars($_POST['comment']);
+        }
+
+    }
+
 }
 
 ?>
